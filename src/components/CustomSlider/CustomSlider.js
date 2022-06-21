@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { GestureHandlerRootView, PanGestureHandler, State } from "react-native-gesture-handler";
+import { GestureHandlerRootView, PanGestureHandler } from "react-native-gesture-handler";
 import Animated, {
   Extrapolate,
   interpolate,
@@ -19,36 +19,45 @@ export const CustomSlider = () => {
     onStart: (event, context) => {
       context.translateX = translateX.value;
     },
-    onActive: (event, context) => {
-      translateX.value = event.translationX + context.translateX;
+    onActive: (e, ctx) => {
+      let newValue;
+
+      newValue = e.translationX;
+
+      if (newValue >= 0 && newValue <= 220) {
+        translateX.value = newValue;
+      }
     },
     onEnd: () => {
       const distance = translateX.value;
 
-      if (distance > SLIDER_WIDTH - 80 || distance < 0) {
-        console.log('Message');
+      if (distance > SLIDER_WIDTH - 100 || distance < 0) {
         translateX.value = withSpring(0);
       }
     },
   });
 
-  const rStyle = useAnimatedStyle(() => {
+  const opacityStyle = useAnimatedStyle(() => {
+    return {
+      opacity: interpolate(translateX.value, [0, 300], [1,0], Extrapolate.EXTEND),
+    }
+  });
+  const transformStyle = useAnimatedStyle(() => {
     return {
       transform: [
         {
           translateX: translateX.value,
         },
       ],
-      opacity: interpolate( translateX.value, [0, 300], [1,0], Extrapolate.EXTEND),
     }
-  })
+  });
   return (
     <GestureHandlerRootView>
         <View style={styles.sliderLine}>
             <PanGestureHandler onGestureEvent={panGestureEvent}>
-              <Animated.View style={[styles.slider, rStyle]} />
+              <Animated.View style={[styles.slider, transformStyle]} />
             </PanGestureHandler>
-          <Text style={styles.sliderLineText}>Swipe to send deposite request</Text>
+            <Animated.Text style={[styles.sliderLineText, opacityStyle]}>Swipe to send deposite request</Animated.Text>
         </View>
     </GestureHandlerRootView>
   );
@@ -64,7 +73,7 @@ const styles = StyleSheet.create({
     zIndex: -4,
     width: 200,
     left: 100,
-    top: 25,
+    top: 23,
     color: '#bebee1',
     fontSize: 13,
   },
