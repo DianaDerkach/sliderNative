@@ -2,6 +2,8 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { GestureHandlerRootView, PanGestureHandler, State } from "react-native-gesture-handler";
 import Animated, {
+  Extrapolate,
+  interpolate,
   useAnimatedGestureHandler,
   useAnimatedStyle,
   useSharedValue,
@@ -37,6 +39,7 @@ export const CustomSlider = () => {
           translateX: translateX.value,
         },
       ],
+      opacity: interpolate( translateX.value, [0, 300], [1,0], Extrapolate.EXTEND),
     }
   })
   return (
@@ -60,7 +63,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     zIndex: -4,
     width: 200,
-    left: 70,
+    left: 100,
     top: 25,
     color: '#bebee1',
     fontSize: 13,
