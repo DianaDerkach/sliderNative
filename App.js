@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { CustomSlider } from "./src/components/CustomSlider/CustomSlider";
 
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     width:300,
     height: 300,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignSelf: 'center'
     },
 });
 

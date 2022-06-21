@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { GestureHandlerRootView, PanGestureHandler } from "react-native-gesture-handler";
+import { GestureHandlerRootView, PanGestureHandler, State } from "react-native-gesture-handler";
 import Animated, {
   useAnimatedGestureHandler,
   useAnimatedStyle,
@@ -23,8 +23,8 @@ export const CustomSlider = () => {
     onEnd: () => {
       const distance = translateX.value;
 
-      if (distance > SLIDER_WIDTH) {
-        console.log(distance);
+      if (distance > SLIDER_WIDTH - 80 || distance < 0) {
+        console.log('Message');
         translateX.value = withSpring(0);
       }
     },
@@ -41,21 +41,17 @@ export const CustomSlider = () => {
   })
   return (
     <GestureHandlerRootView>
-      <View style={styles.containerSlider}>
         <View style={styles.sliderLine}>
             <PanGestureHandler onGestureEvent={panGestureEvent}>
               <Animated.View style={[styles.slider, rStyle]} />
             </PanGestureHandler>
           <Text style={styles.sliderLineText}>Swipe to send deposite request</Text>
         </View>
-      </View>
     </GestureHandlerRootView>
   );
 };
 const styles = StyleSheet.create({
   sliderLine: {
-    display: 'flex',
-    justifyContent: 'flex-start',
     borderRadius: 5,
     width: SLIDER_WIDTH,
     backgroundColor: '#f7f6f9',
@@ -68,10 +64,6 @@ const styles = StyleSheet.create({
     top: 25,
     color: '#bebee1',
     fontSize: 13,
-  },
-  containerSlider: {
-    display: 'flex',
-    justifyContent: 'center',
   },
   slider: {
     width: 80,
