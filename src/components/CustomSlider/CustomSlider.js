@@ -52,17 +52,21 @@ export const CustomSlider = () => {
     }
   });
   return (
-    <GestureHandlerRootView>
-        <View style={styles.sliderLine}>
-            <PanGestureHandler onGestureEvent={panGestureEvent}>
-              <Animated.View style={[styles.slider, transformStyle]} />
-            </PanGestureHandler>
-            <Animated.Text style={[styles.sliderLineText, opacityStyle]}>Swipe to send deposite request</Animated.Text>
-        </View>
-    </GestureHandlerRootView>
+    <View style={styles.container}>
+      <View style={styles.sliderLine}>
+        <PanGestureHandler onGestureEvent={panGestureEvent}>
+          <Animated.View style={[styles.slider, transformStyle]} />
+        </PanGestureHandler>
+        <Animated.Text style={[styles.sliderLineText, opacityStyle]}>Swipe to send deposite request</Animated.Text>
+      </View>
+    </View>
   );
 };
 const styles = StyleSheet.create({
+  container: {
+    position: 'relative',
+    top: 50,
+  },
   sliderLine: {
     borderRadius: 5,
     width: SLIDER_WIDTH,

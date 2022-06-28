@@ -1,22 +1,23 @@
-import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
-import { CustomSlider } from "./src/components/CustomSlider/CustomSlider";
+import React from "react";
+import { StyleSheet, Dimensions } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { Main } from "./src/screens/Main";
+
 
 const App = () => {
   return (
-    <View style={styles.container}>
-      <CustomSlider/>
-    </View>
+      <Main/>
       );
 };
 
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
-    width:300,
-    height: 300,
-    justifyContent: 'center',
-    alignSelf: 'center'
+    flexDirection: 'column',
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
+    justifyContent: 'space-between',
+    alignItems: 'center'
     },
 });
 
