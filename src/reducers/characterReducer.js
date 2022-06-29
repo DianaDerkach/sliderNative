@@ -1,19 +1,40 @@
-import { swipeDirections } from "react-native-swipe-gestures";
+import { SWIPE_LEFT, SWIPE_RIGHT, SWIPE_UP, SWIPE_DOWN } from "../components/actions/swipeActions";
 
-const onSwipe = (gestureName, gestureState) => {
-  const {SWIPE_UP, SWIPE_DOWN, SWIPE_LEFT, SWIPE_RIGHT} = swipeDirections;
-  switch (gestureName) {
+export const characterReducer = (state, action) => {
+  switch (action.type) {
     case SWIPE_UP:
-      setBias( 0);
-      break;
+      return {
+        ...state,
+        character: {
+          bias: 0,
+          category: 'none'
+        }
+      }
     case SWIPE_DOWN:
-      console.log('down');
-      break;
+      return {
+        ...state,
+        character: {
+          bias: 0,
+          category: 'none'
+        }
+      }
     case SWIPE_LEFT:
-      setBias( -50);
-      break;
+      return {
+        ...state,
+        bias: -50,
+        character: {
+          bias: -50,
+          category: 'eatable'
+        }
+      }
     case SWIPE_RIGHT:
-      setBias(50);
-      break;
+      return {
+        ...state,
+        bias: 50,
+        character: {
+          bias: 50,
+          category: 'uneatable'
+        }
+      }
   }
 };

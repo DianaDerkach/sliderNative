@@ -1,9 +1,9 @@
 import React from "react";
 import { ScoreComponent } from "./score.component";
 
-export const ScoreContainer = () => {
+export const ScoreContainer = ({score}) => {
   return (
-    <ScoreComponent/>
+    <ScoreComponent score={score}/>
   );
 };
 
