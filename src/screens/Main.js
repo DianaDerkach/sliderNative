@@ -1,44 +1,37 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 import {View, StyleSheet, ImageBackground, Dimensions} from 'react-native';
-import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
-import {ThingsDisplayerComponent} from '../components/ThingsDisplayer/thingsDisplayer.component';
+import GestureRecognizer from 'react-native-swipe-gestures';
+import {ThingsScreenComponent} from '../components/ThingsScreen/thingsScreen.component';
 import {ScoreComponent} from '../components/Score/score.component';
 import { CharacterContainer } from '../components/Character/character.container';
+import { scoreReducer } from "../reducers/scoreReducer";
+import { characterReducer } from "../reducers/characterReducer";
+import { combineReducers, initialState } from "../reducers/combineReducers";
+import { swipeLeft, swipeRight, swipeUp } from "../components/actions/swipeActions";
 
 export const Main = () => {
-  const [bias, setBias] = useState(0);
 
-  const onSwipe = (gestureName, gestureState) => {
-    const {SWIPE_UP, SWIPE_DOWN, SWIPE_LEFT, SWIPE_RIGHT} = swipeDirections;
-    switch (gestureName) {
-      case SWIPE_UP:
-        setBias( 0);
-        break;
-      case SWIPE_DOWN:
-        console.log('down');
-        break;
-      case SWIPE_LEFT:
-        setBias( -50);
-        break;
-      case SWIPE_RIGHT:
-        setBias(50);
-        break;
-    }
-  };
+  const [data, dispatch] = useReducer(combineReducers({ characterReducer, scoreReducer }), initialState);
+
   return (
-    <GestureRecognizer onSwipe={(direction, state) => onSwipe(direction, state)}>
-      <View style={styles.container}>
+
+    <GestureRecognizer
+      onSwipeLeft={() => dispatch(swipeLeft())}
+      onSwipeRight={() => dispatch(swipeRight())}
+      onSwipeUp={() => dispatch(swipeUp())}
+    >
+       <View style={styles.container}>
         <ImageBackground
           source={require('../assets/img/background.png')}
           style={styles.background}>
           <View style={styles.topContainer}>
-            <ScoreComponent />
-            <ThingsDisplayerComponent />
+            <ScoreComponent score={data.score} />
+            <ThingsScreenComponent />
           </View>
-          <CharacterContainer bias={bias} />
+           <CharacterContainer bias={data.character.bias} />
         </ImageBackground>
       </View>
-     </GestureRecognizer>
+      </GestureRecognizer>
   )};
 
 const styles = StyleSheet.create({
