@@ -1,14 +1,10 @@
 import React from 'react';
-import {View, Image, StyleSheet, Text} from 'react-native';
+import {View, StyleSheet, Text} from 'react-native';
 
-export const ThingsScreenComponent = () => {
+export const QuestionsScreenComponent = ({question}) => {
   return (
     <View style={styles.container}>
-      <Image
-        source={require('../../assets/img/food/apple.png')}
-        style={styles.image}
-      />
-      <Text>apple</Text>
+      <Text>{question}</Text>
     </View>
   );
 };
@@ -16,12 +12,13 @@ export const ThingsScreenComponent = () => {
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
+    fontSize: 15,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 10,
-    width: 200,
+    width: 400,
     height: 100,
-    backgroundColor: '#ded7c9',
+    backgroundColor: '#f5f1ed',
   },
   image: {
     width: 70,
