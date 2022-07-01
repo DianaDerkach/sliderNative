@@ -3,7 +3,6 @@ import { StyleSheet, Dimensions } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Main } from "./src/screens/Main";
 
-
 const App = () => {
   return (
       <Main/>

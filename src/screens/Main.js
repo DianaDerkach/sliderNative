@@ -9,10 +9,9 @@ import { scoreReducer } from "../reducers/scoreReducer";
 import { characterReducer } from "../reducers/characterReducer";
 import { combineReducers, initialState } from "../reducers/combineReducers";
 
-
 export const Main = () => {
   const [data, dispatch] = useReducer(combineReducers({ characterReducer, scoreReducer }), initialState);
-  const [questionToShow, setQuestionToShow] = useState({ });
+  const [questionToShow, setQuestionToShow] = useState({});
   const [screenQuestions, setScreenQuestions] = useState(data.questions.map((question) => question));
 
   const getQuestion = () => {
@@ -33,7 +32,6 @@ export const Main = () => {
       setScreenQuestions(screenQuestions.filter((item) => item.question !== screenQuestions[index].question));
     }
   }
-
 
   return (
     <GestureRecognizer
