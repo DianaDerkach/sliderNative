@@ -21,26 +21,25 @@ export const initialState = {
       wrongAnswer: 'Five',
       question: 'What is the question number?'
     },
-  {
+   {
       id: '1',
       rightAnswer: '24?',
       wrongAnswer: '21',
       question: 'How old is she?'
-    }
-  ,
-  {
+    },
+    {
       id: '2',
       rightAnswer: 'no',
       wrongAnswer: 'yes',
       question: 'Does he goes to the theater?'
     },
-  {
+    {
       id: '3',
       rightAnswer: 'i dont tell',
       wrongAnswer: 'okey',
       question: 'Tell me about a time you showed initiative on the job'
     },
-  {
+    {
       id: '4',
       rightAnswer: 'cry',
       wrongAnswer: 'laugh',
